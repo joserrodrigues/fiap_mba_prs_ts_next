@@ -1,29 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import HomeView from "./HomeView";
 import { useRouter } from "next/router";
-import { DetailControllerType } from "../Detail/DetailController";
+import { MenuInfo } from "../../Interfaces/MenuInfo";
 
-const HomeController: FC = () => {
-  const router = useRouter();
+type iProps = {
+  items: MenuInfo[];
+};
+const HomeController: FC<iProps> = ({ items }) => {
+  console.log("Checking items Controller");
+  console.log(items);
 
-  const onDetail1Clicked = () => {
-    router.push("/detail/1");
-  };
-  const onDetailDataClicked = () => {
-    let info: DetailControllerType = {
-      data: JSON.stringify({ info: 1, info2: 2 }),
-    };
-    router.push({
-      pathname: "/detail/2",
-      query: info,
-    });
-  };
-  return (
-    <HomeView
-      onDetail1Clicked={onDetail1Clicked}
-      onDetailDataClicked={onDetailDataClicked}
-    />
-  );
+  return <HomeView items={items} />;
 };
 
 export default HomeController;
